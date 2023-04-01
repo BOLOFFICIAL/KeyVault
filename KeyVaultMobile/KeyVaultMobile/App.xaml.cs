@@ -9,12 +9,12 @@ namespace KeyVaultMobile
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()
         {
+
         }
 
         protected override void OnSleep()
