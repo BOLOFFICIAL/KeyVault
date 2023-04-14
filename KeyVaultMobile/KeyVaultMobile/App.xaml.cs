@@ -1,6 +1,5 @@
 ﻿using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace KeyVaultMobile
 {
@@ -9,12 +8,12 @@ namespace KeyVaultMobile
         public App()
         {
             InitializeComponent();
-            MainPage = new LoginPage();
+            
         }
 
         protected override void OnStart()
         {
-
+            MainPage = new LoginPage();
         }
 
         protected override void OnSleep()
