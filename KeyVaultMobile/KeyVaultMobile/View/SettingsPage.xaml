@@ -3,10 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KeyVaultMobile.SettingsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <Entry Grid.Row="1"
+                   Margin="15,0"
+                   HorizontalTextAlignment="Center"
+                   Placeholder="Старый пароль"/>
+            <Entry Grid.Row="2"
+                   Margin="15,0"
+                   HorizontalTextAlignment="Center"
+                   Placeholder="Новый пароль"/>
+            <Entry Grid.Row="3"
+                   Margin="15,0"
+                   HorizontalTextAlignment="Center"
+                   Placeholder="Повторите новый пароль"/>
+            <Button Text="Сохранить" 
+                    Grid.Row="5"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    BackgroundColor="White"
+                    CornerRadius="10"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

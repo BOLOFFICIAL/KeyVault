@@ -20,7 +20,7 @@ namespace KeyVaultMobile
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new AddPasswordPage());
+            Application.Current.MainPage = new NavigationPage(new PasswordPage());
         }
     }
 }

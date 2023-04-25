@@ -9,12 +9,12 @@ using Xamarin.Forms.Xaml;
 
 namespace KeyVaultMobile
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsPage : ContentPage
-    {
-        public SettingsPage()
-        {
-            InitializeComponent();
-        }
-    }
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class SettingsPage : ContentPage
+	{
+		public SettingsPage ()
+		{
+			InitializeComponent ();
+		}
+	}
 }

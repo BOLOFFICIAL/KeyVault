@@ -9,7 +9,7 @@ namespace KeyVaultMobile
         public App()
         {
             InitializeComponent();
-            MainPage = new LoginPage();
+            MainPage = new SettingsPage();
         }
 
         protected override void OnStart()

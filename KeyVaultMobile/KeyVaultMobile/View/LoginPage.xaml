@@ -43,7 +43,6 @@
                     BackgroundColor="White"
                     BorderColor="Black"
                     BorderWidth="2"
-                    Clicked="Button_Clicked"
                     CornerRadius="30"/>
         </Grid>
     </ContentPage.Content>
