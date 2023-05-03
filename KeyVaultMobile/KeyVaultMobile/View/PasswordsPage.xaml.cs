@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeyVaultMobile.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,8 @@ namespace KeyVaultMobile
         public PasswordsPage()
         {
             InitializeComponent();
+            this.BindingContext = new PasswordsPageViewModel();
             NavigationPage.SetHasNavigationBar(this, false);
-        }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            Application.Current.MainPage = new NavigationPage(new PasswordPage());
         }
     }
 }

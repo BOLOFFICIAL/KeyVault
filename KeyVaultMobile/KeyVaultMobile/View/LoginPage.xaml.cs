@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeyVaultMobile.ViewModel;
+using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,18 +12,8 @@ namespace KeyVaultMobile
         public LoginPage()
         {
             InitializeComponent();
-        }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            if (LoginPageEntry.Text == "2190")
-            {
-                Application.Current.MainPage = new NavigationPage(new PasswordsPage());
-            }
-            else 
-            {
-                LoginPageEntry.Text = "";
-            }
+            this.BindingContext = new LoginPageViewModel();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

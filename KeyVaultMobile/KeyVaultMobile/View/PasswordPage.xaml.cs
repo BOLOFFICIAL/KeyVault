@@ -15,6 +15,7 @@ namespace KeyVaultMobile
         public PasswordPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

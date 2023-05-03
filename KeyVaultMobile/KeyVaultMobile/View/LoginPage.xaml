@@ -7,6 +7,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="60"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -25,24 +26,33 @@
                    VerticalTextAlignment="Center"
                    HorizontalTextAlignment="Center"/>
 
-            <Entry x:Name="LoginPageEntry"
-                   Grid.Row="1"
+            <Entry Grid.Row="1"
                    Grid.Column="1"
                    Keyboard="Numeric"
                    FontSize="30"
                    TextColor="Black"   
                    HorizontalTextAlignment="Center"
                    IsPassword="True"
+                   Text="{Binding Password}"
                    Placeholder="password"/>
-            
+
+            <Label Text="{Binding ErrorMessage}"
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   FontSize="15"
+                   TextColor="Red"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"/>
+
             <Button Text="Войти" 
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Grid.Column="1"
                     FontSize="20"
                     FontAttributes="Bold"
                     BackgroundColor="White"
                     BorderColor="Black"
                     BorderWidth="2"
+                    Command="{Binding InserPass}"
                     CornerRadius="30"/>
         </Grid>
     </ContentPage.Content>

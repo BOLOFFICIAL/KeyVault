@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeyVaultMobile.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace KeyVaultMobile
         public GeneratePasswordPage()
         {
             InitializeComponent();
+            this.BindingContext = new GeneratePasswordPageViewModel();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }
