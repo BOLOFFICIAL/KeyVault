@@ -18,6 +18,7 @@ namespace KeyVaultMobile.Model
             Numbers = true;
             Chars = true;
             Letter = true;
+            Password = "";
         }
 
 
