@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeyVaultWindows.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,12 @@ namespace KeyVaultWindows.View
     /// <summary>
     /// Логика взаимодействия для PageAuthorization.xaml
     /// </summary>
-    public partial class PageAuthorization : Page
+    public partial class PageAuthorization
     {
         public PageAuthorization()
         {
             InitializeComponent();
+            DataContext = new PageAuthorizationViewModel();
         }
     }
 }
