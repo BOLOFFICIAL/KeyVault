@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace KeyVaultWindows.Model
 {
-    class Settings
+    internal class Context
     {
-        public string ProgrammPass { get; set; } = "Bolofficial";
+        public static KeyVaultWindows.PageMain PageMain { get; set; }
     }
 }

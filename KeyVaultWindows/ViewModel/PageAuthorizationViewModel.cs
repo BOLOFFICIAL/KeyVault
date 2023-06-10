@@ -67,13 +67,16 @@ namespace KeyVaultWindows.ViewModel
 
         private void OnEntryPasswordCommandExecuted(object p)
         {
-            if (_authorization.Password == _settings.ProgrammPass)
+            if (_authorization.Password.Length > 0) 
             {
-                //Error = "Правильный пароль";
-            }
-            else 
-            {
-                Error = "Неправильный пароль";
+                if (_authorization.Password == _settings.ProgrammPass)
+                {
+                    Context.PageMain.Content = new KeyVaultWindows.View.PageMain();
+                }
+                else
+                {
+                    Error = "Неправильный пароль";
+                }
             }
         }
 

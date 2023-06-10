@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KeyVaultWindows.Model;
+using KeyVaultWindows.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +20,22 @@ namespace KeyVaultWindows
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PageMain : Window
     {
-        public MainWindow()
+        private Settings _settings;
+        public PageMain()
         {
             InitializeComponent();
+            _settings = new Settings();
+            Context.PageMain = this;
+            if (_settings.ProgrammPass.Length > 0)
+            {
+                Content = new PageAuthorization();
+            }
+            else
+            {
+                Content = new KeyVaultWindows.View.PageMain();
+            }
         }
     }
 }
