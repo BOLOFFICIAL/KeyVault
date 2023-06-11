@@ -1,19 +1,10 @@
 ﻿using KeyVaultWindows.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Windows.Input;
 using KeyVaultWindows.Command;
-using System.Net;
-using System.Runtime;
-using System.Reflection.Metadata;
-using System.Security.Policy;
-using System.Windows.Shapes;
 using System.Windows;
 using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace KeyVaultWindows.ViewModel
 {
@@ -45,10 +36,60 @@ namespace KeyVaultWindows.ViewModel
             }
         }
 
+        public List<string> Passwords 
+        {
+            get
+            {
+                return Context.PasswordString;
+            }
+            set
+            {
+                if (Context.PasswordString != value)
+                {
+                    Context.PasswordString = value;
+                    OnPropertyChanged("Passwords");
+                    
+                }
+            }
+        }
+
+        public int PasswordIndex
+        {
+            get
+            {
+                return Context.PasswordIndex;
+            }
+            set
+            {
+                if (Context.PasswordIndex != value)
+                {
+                    Context.PasswordIndex = value;
+                    OnPropertyChanged("PasswordIndex");
+                    OpenPassword();
+                }
+            }
+        }
+
         protected void OnPropertyChanged(string propName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+
+        private void OpenPassword()
+        {
+            Context.management.IsReadonly = true;
+            Context.management.Title = "Пароль";
+            Context.management.ButtonContent = "Удалить";
+            Context.management.GridLength = new GridLength(1, GridUnitType.Star);
+            Context.PageMain.Content = new KeyVaultWindows.View.PagePasswordManagement();
+            Context.PasswordAction = "DeletePassword";
+
+            Context.management.Name = Context.Passwords[PasswordIndex].Name;
+            Context.management.Pass = Context.Passwords[PasswordIndex].Pass;
+            Context.management.Adress = Context.Passwords[PasswordIndex].Adress;
+            Context.management.Login = Context.Passwords[PasswordIndex].Login;
+            Context.management.Addition = Context.Passwords[PasswordIndex].Addition;
         }
 
         private void OnPageTransitionCommandExecuted(object p) 
@@ -56,14 +97,18 @@ namespace KeyVaultWindows.ViewModel
             switch (p) 
             { 
                 case "PasswordManagement":
-                    Context.management = new Management() 
-                    { 
-                        IsReadonly = false, 
-                        Title = "Добавить пароль", 
-                        ButtonContent = "Добавить",
-                        GridLength = new GridLength(0, GridUnitType.Star)
-                    };
-                    Context.PageMain.Content =  new KeyVaultWindows.View.PagePasswordManagement();  
+                    Context.management.IsReadonly = false;
+                    Context.management.Title = "Добавить пароль";
+                    Context.management.ButtonContent = "Добавить";
+                    Context.management.GridLength = new GridLength(0, GridUnitType.Star);
+                    Context.PageMain.Content =  new KeyVaultWindows.View.PagePasswordManagement();
+                    Context.PasswordAction = "AddPassword";
+
+                    Context.management.Name = string.Empty;
+                    Context.management.Pass = string.Empty;
+                    Context.management.Adress = string.Empty;
+                    Context.management.Login = string.Empty;
+                    Context.management.Addition = string.Empty;
                     break; 
                 case "PasswordGeneration":  
                     Context.PageMain.Content = new KeyVaultWindows.View.PagePasswordGeneration();  

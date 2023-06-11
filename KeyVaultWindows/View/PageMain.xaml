@@ -54,11 +54,12 @@
                      Text="{Binding FindPassword,UpdateSourceTrigger=PropertyChanged}"
                      HorizontalContentAlignment="Center"
                      VerticalContentAlignment="Center"/>
-            
-            <ScrollViewer Grid.Row="1">
-                <StackPanel/>
-            </ScrollViewer>
-            
+
+            <ListView Grid.Row="1" 
+                      HorizontalContentAlignment="Center"
+                      ItemsSource="{Binding Passwords,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding PasswordIndex,UpdateSourceTrigger=PropertyChanged}"/>
+
         </Grid>
     </Grid>
 </Page>

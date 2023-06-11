@@ -28,6 +28,9 @@ namespace KeyVaultWindows
             InitializeComponent();
             _settings = new Settings();
             Context.PageMain = this;
+            Context.PasswordString = new List<string>();
+            Context.management = new Management();
+            Context.Passwords = new List<Password>();
             if (_settings.ProgrammPass.Length > 0)
             {
                 Content = new PageAuthorization();
