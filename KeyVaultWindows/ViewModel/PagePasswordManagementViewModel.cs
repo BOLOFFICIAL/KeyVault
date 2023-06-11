@@ -2,7 +2,6 @@
 using KeyVaultWindows.Model;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace KeyVaultWindows.ViewModel
@@ -180,13 +179,19 @@ namespace KeyVaultWindows.ViewModel
                 case "AddPassword":
                     Context.PasswordString.Add(Name);
                     Context.Passwords.Add(new Password(Name, Pass, Adress, Login, Addition));
+                    Name = string.Empty;
+                    Pass = string.Empty;
+                    Adress = string.Empty;
+                    Login = string.Empty;
+                    Addition = string.Empty;
                     break;
                 case "DeletePassword":
-                    if (MessageBox.Show("Удалить пароль?","",MessageBoxButton.YesNo,MessageBoxImage.Question)== MessageBoxResult.Yes) 
+                    if (MessageBox.Show("Удалить пароль?", "", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         Context.Passwords.RemoveAt(Context.PasswordIndex);
                         Context.PasswordString.RemoveAt(Context.PasswordIndex);
                         Context.PageMain.Content = new KeyVaultWindows.View.PageMain();
+                        Context.PasswordIndex = -1;
                     }
                     break;
                 case "SavePassword":
@@ -201,7 +206,6 @@ namespace KeyVaultWindows.ViewModel
                     Title = "Пароль";
                     ButtonContent = "Удалить";
                     GridLength = new GridLength(1, GridUnitType.Star);
-                    //Context.PageMain.Content = new KeyVaultWindows.View.PagePasswordManagement();
                     Context.PasswordAction = "DeletePassword";
                     break;
             }
@@ -209,11 +213,11 @@ namespace KeyVaultWindows.ViewModel
 
         private bool CanPasswordCommandExecute(object p)
         {
-            if (Context.PasswordAction == "AddPassword"|| Context.PasswordAction == "SavePassword")
+            if (Context.PasswordAction == "AddPassword" || Context.PasswordAction == "SavePassword")
             {
                 return Name.ToString().Length > 0 && Pass.ToString().Length > 0 && Adress.ToString().Length > 0;
             }
-            else 
+            else
             {
                 return true;
             }
