@@ -10,12 +10,12 @@ namespace KeyVaultWindows.ViewModel
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private Management _management;
-        public ICommand PageTransition { get; }
+        public ICommand PageTransitionCommand { get; }
 
         public PagePasswordManagementViewModel()
         {
             _management = Context.management;
-            PageTransition = new LambdaCommand(OnPageTransitionCommandExecuted, CanPageTransitionCommandExecute);
+            PageTransitionCommand = new LambdaCommand(OnPageTransitionCommandExecuted, CanPageTransitionCommandExecute);
         }
 
         public string Title

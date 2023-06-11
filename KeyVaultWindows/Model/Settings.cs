@@ -8,6 +8,6 @@ namespace KeyVaultWindows.Model
 {
     class Settings
     {
-        public string ProgrammPass { get; set; } = "Bolofficial";
+        public string ProgrammPass { get; set; } = "";
     }
 }

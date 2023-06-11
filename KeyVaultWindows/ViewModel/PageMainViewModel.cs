@@ -30,19 +30,20 @@ namespace KeyVaultWindows.ViewModel
             switch (p) 
             { 
                 case "PasswordManagement":
-                    Context.management = new Management() { 
+                    Context.management = new Management() 
+                    { 
                         IsReadonly = true, 
                         Title = "Добавить пароль", 
                         ButtonContent = "Добавить",
                         GridLength = new GridLength(0, GridUnitType.Star)
-            };
+                    };
                     Context.PageMain.Content =  new KeyVaultWindows.View.PagePasswordManagement();  
                     break; 
                 case "PasswordGeneration":  
                     Context.PageMain.Content = new KeyVaultWindows.View.PagePasswordGeneration();  
                     break; 
-                case "PasswordExport":      
-                    Context.PageMain.Content = new KeyVaultWindows.View.PagePasswordManagement();  
+                case "PasswordExport":
+                    MessageBox.Show("Soon");
                     break; 
                 case "Settings":            
                     Context.PageMain.Content = new KeyVaultWindows.View.PageSettings();            

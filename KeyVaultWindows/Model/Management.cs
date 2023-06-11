@@ -11,11 +11,7 @@ namespace KeyVaultWindows.Model
     {
         public string Title { get; set; } = string.Empty;
         public bool IsReadonly { get; set; } = true;
-        public string ButtonContent { get; set; } = "Bolofficial";
+        public string ButtonContent { get; set; } = string.Empty;
         public GridLength GridLength { get; set; }
-        //public Management() 
-        //{
-        //    var e = new GridLength(1, GridUnitType.Auto);
-        //}
     }
 }
