@@ -22,7 +22,8 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column = "0"
-                    Content="Назад"/>
+                    Content="Назад"
+                    Command="{Binding PageTransition}"/>
             <Label Grid.Column = "1"
                    Content="Настройки"/>
         </Grid>

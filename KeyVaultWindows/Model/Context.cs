@@ -8,6 +8,7 @@ namespace KeyVaultWindows.Model
 {
     internal class Context
     {
+        public static Management management;
         public static KeyVaultWindows.PageMain PageMain { get; set; }
     }
 }

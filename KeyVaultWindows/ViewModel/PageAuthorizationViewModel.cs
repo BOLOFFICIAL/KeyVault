@@ -16,6 +16,7 @@ namespace KeyVaultWindows.ViewModel
         public event PropertyChangedEventHandler? PropertyChanged;
         private Authorization _authorization;
         private Settings _settings;
+        public ICommand EntryPasswordCommand { get; }
 
         public PageAuthorizationViewModel()
         {
@@ -63,26 +64,21 @@ namespace KeyVaultWindows.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
-        public ICommand EntryPasswordCommand { get; }
-
         private void OnEntryPasswordCommandExecuted(object p)
         {
-            if (_authorization.Password.Length > 0) 
+            if (_authorization.Password == _settings.ProgrammPass)
             {
-                if (_authorization.Password == _settings.ProgrammPass)
-                {
-                    Context.PageMain.Content = new KeyVaultWindows.View.PageMain();
-                }
-                else
-                {
-                    Error = "Неправильный пароль";
-                }
+                Context.PageMain.Content = new KeyVaultWindows.View.PageMain();
+            }
+            else
+            {
+                Error = "Неправильный пароль";
             }
         }
 
         private bool CanEntryPasswordCommandExecute(object p)
         {
-            return true;
+            return _authorization.Password.Length > 0;
         }
     }
 }

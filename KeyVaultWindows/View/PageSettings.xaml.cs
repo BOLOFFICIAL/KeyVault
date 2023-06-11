@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeyVaultWindows.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace KeyVaultWindows.View
         public PageSettings()
         {
             InitializeComponent();
+            DataContext = new PageSettingsViewModel();
         }
     }
 }
