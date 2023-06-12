@@ -18,7 +18,7 @@ namespace KeyVaultWindows.Model
             var random = new Random(); 
             var consts = new List<string>(); 
             if (Numbers)    consts.Add("0123456789"); 
-            if (Chars)      consts.Add("@#%\"&*()_-+={ }<>?:[].~"); 
+            if (Chars)      consts.Add("@#%\"&*()_-+={}<>?:[].~"); 
             if (Letters)    consts.Add("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"); 
             int.TryParse(Length, out int length); 
             var password = new StringBuilder(length);

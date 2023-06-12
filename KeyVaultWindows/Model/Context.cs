@@ -10,6 +10,9 @@ namespace KeyVaultWindows.Model
     internal class Context
     {
         public static Management management;
+        public static string filter;
+        public static List<string> AllPasswordString { get; set; }
+        public static List<Password> AllPasswords { get; set; }
         public static List<string> PasswordString { get; set; }
         public static List<Password> Passwords { get; set; }
         public static int PasswordIndex { get; set; }

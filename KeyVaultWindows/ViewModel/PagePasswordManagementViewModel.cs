@@ -1,6 +1,7 @@
 ﻿using KeyVaultWindows.Command;
 using KeyVaultWindows.Model;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -177,8 +178,17 @@ namespace KeyVaultWindows.ViewModel
             switch (Context.PasswordAction)
             {
                 case "AddPassword":
-                    Context.PasswordString.Add(Name);
-                    Context.Passwords.Add(new Password(Name, Pass, Adress, Login, Addition));
+                    if (Context.AllPasswords.Any(pass =>
+                    pass.Name == Name &&
+                    pass.Pass == Pass &&
+                    pass.Adress == Adress &&
+                    pass.Login == Login))
+                    {
+                        MessageBox.Show("Такой элемент уже существует");
+                        break;
+                    }
+                    Context.AllPasswordString.Add(Name);
+                    Context.AllPasswords.Add(new Password(Name, Pass, Adress, Login, Addition));
                     Name = string.Empty;
                     Pass = string.Empty;
                     Adress = string.Empty;
@@ -188,20 +198,15 @@ namespace KeyVaultWindows.ViewModel
                 case "DeletePassword":
                     if (MessageBox.Show("Удалить пароль?", "", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
-                        Context.Passwords.RemoveAt(Context.PasswordIndex);
-                        Context.PasswordString.RemoveAt(Context.PasswordIndex);
+                        DeletePassword(Context.Passwords[Context.PasswordIndex]);
+                        DeletePassword(Context.PasswordString[Context.PasswordIndex]);
                         Context.PageMain.Content = new KeyVaultWindows.View.PageMain();
                         Context.PasswordIndex = -1;
                     }
                     break;
                 case "SavePassword":
-                    Context.PasswordString[Context.PasswordIndex] = Name;
-                    Context.Passwords[Context.PasswordIndex].Name = Name;
-                    Context.Passwords[Context.PasswordIndex].Pass = Pass;
-                    Context.Passwords[Context.PasswordIndex].Adress = Adress;
-                    Context.Passwords[Context.PasswordIndex].Login = Login;
-                    Context.Passwords[Context.PasswordIndex].Addition = Addition;
-
+                    EditPassword(Context.Passwords[Context.PasswordIndex], new Password(Name, Pass, Adress, Login, Addition));
+                    EditPassword(Context.PasswordString[Context.PasswordIndex], Name);
                     IsReadonly = true;
                     Title = "Пароль";
                     ButtonContent = "Удалить";
@@ -246,6 +251,49 @@ namespace KeyVaultWindows.ViewModel
         private bool CanPageTransitionCommandExecute(object p)
         {
             return true;
+        }
+
+        private void DeletePassword(Password password)
+        {
+            Context.AllPasswords.RemoveAll(pass =>
+            pass.Name == password.Name &&
+            pass.Pass == password.Pass &&
+            pass.Adress == password.Adress &&
+            pass.Login == password.Login &&
+            pass.Addition == password.Addition);
+        }
+
+        private void DeletePassword(string password)
+        {
+            Context.AllPasswordString.RemoveAll(pass => pass == password);
+        }
+
+        private void EditPassword(Password password, Password newpassword)
+        {
+            var pass = Context.AllPasswords.First(pass =>
+            pass.Name == password.Name &&
+            pass.Pass == password.Pass &&
+            pass.Adress == password.Adress &&
+            pass.Login == password.Login &&
+            pass.Addition == password.Addition);
+
+            if (pass != null)
+            {
+                pass.Name = newpassword.Name;
+                pass.Pass = newpassword.Pass;
+                pass.Adress = newpassword.Adress;
+                pass.Login = newpassword.Login;
+                pass.Addition = newpassword.Addition;
+            }
+        }
+
+        private void EditPassword(string password, string newpassword)
+        {
+            int index = Context.AllPasswordString.FindIndex(pass => pass == password);
+            if (index != -1)
+            {
+                Context.AllPasswordString[index] = newpassword;
+            }
         }
     }
 }

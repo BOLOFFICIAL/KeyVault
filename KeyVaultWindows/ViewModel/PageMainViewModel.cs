@@ -5,6 +5,7 @@ using KeyVaultWindows.Command;
 using System.Windows;
 using System.ComponentModel;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace KeyVaultWindows.ViewModel
 {
@@ -24,13 +25,32 @@ namespace KeyVaultWindows.ViewModel
         {
             get
             {
-                return _main.FindPassword;
+                if (Context.filter.Length == 0)
+                {
+                    Passwords = Context.AllPasswordString.ToList();
+                    Context.Passwords = Context.AllPasswords.ToList();
+                }
+                else 
+                {
+                    FilterPasswords();
+                }
+                return Context.filter;
             }
             set
             {
-                if (_main.FindPassword != value)
+                if (Context.filter != value)
                 {
-                    _main.FindPassword = value;
+                    Context.filter = value;
+                    if (Context.filter.Length == 0)
+                    {
+                        Passwords = Context.AllPasswordString.ToList();
+                        Context.Passwords = Context.AllPasswords.ToList();
+                    }
+                    else 
+                    {
+                        FilterPasswords();
+                        Passwords = Context.PasswordString.ToList();
+                    }
                     OnPropertyChanged("FindPassword");
                 }
             }
@@ -48,7 +68,6 @@ namespace KeyVaultWindows.ViewModel
                 {
                     Context.PasswordString = value;
                     OnPropertyChanged("Passwords");
-                    
                 }
             }
         }
@@ -125,6 +144,24 @@ namespace KeyVaultWindows.ViewModel
         private bool CanPageTransitionCommandExecute(object p)
         {
             return true;
+        }
+
+        private void FilterPasswords()
+        {
+            Context.Passwords = Context.AllPasswords
+                .Where(tmppass =>
+                    tmppass.Name.Contains(Context.filter) ||
+                    tmppass.Pass.Contains(Context.filter) ||
+                    tmppass.Adress.Contains(Context.filter) ||
+                    tmppass.Login.Contains(Context.filter) ||
+                    tmppass.Addition.Contains(Context.filter))
+                .Select(tmppass =>
+                    new Password(tmppass.Name, tmppass.Pass, tmppass.Adress, tmppass.Login, tmppass.Addition))
+                .ToList();
+
+            Context.PasswordString = Context.Passwords
+                .Select(tmppass => tmppass.Name)
+                .ToList();
         }
     }
 }
