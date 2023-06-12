@@ -182,7 +182,8 @@ namespace KeyVaultWindows.ViewModel
                     pass.Name == Name &&
                     pass.Pass == Pass &&
                     pass.Adress == Adress &&
-                    pass.Login == Login))
+                    pass.Login == Login &&
+                    pass.Addition == Addition))
                     {
                         MessageBox.Show("Такой элемент уже существует");
                         break;
@@ -205,6 +206,16 @@ namespace KeyVaultWindows.ViewModel
                     }
                     break;
                 case "SavePassword":
+                    if (Context.AllPasswords.Any(pass =>
+                    pass.Name == Name &&
+                    pass.Pass == Pass &&
+                    pass.Adress == Adress &&
+                    pass.Login == Login &&
+                    pass.Addition == Addition))
+                    {
+                        MessageBox.Show("Такой элемент уже существует");
+                        break;
+                    }
                     EditPassword(Context.Passwords[Context.PasswordIndex], new Password(Name, Pass, Adress, Login, Addition));
                     EditPassword(Context.PasswordString[Context.PasswordIndex], Name);
                     IsReadonly = true;

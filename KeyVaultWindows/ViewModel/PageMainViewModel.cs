@@ -1,11 +1,15 @@
-﻿using KeyVaultWindows.Model;
+﻿using KeyVaultWindows.Command;
+using KeyVaultWindows.Model;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
-using System.Windows.Input;
-using KeyVaultWindows.Command;
-using System.Windows;
 using System.ComponentModel;
-using System.Windows.Controls;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Input;
 
 namespace KeyVaultWindows.ViewModel
 {
@@ -30,7 +34,7 @@ namespace KeyVaultWindows.ViewModel
                     Passwords = Context.AllPasswordString.ToList();
                     Context.Passwords = Context.AllPasswords.ToList();
                 }
-                else 
+                else
                 {
                     FilterPasswords();
                 }
@@ -46,7 +50,7 @@ namespace KeyVaultWindows.ViewModel
                         Passwords = Context.AllPasswordString.ToList();
                         Context.Passwords = Context.AllPasswords.ToList();
                     }
-                    else 
+                    else
                     {
                         FilterPasswords();
                         Passwords = Context.PasswordString.ToList();
@@ -56,7 +60,7 @@ namespace KeyVaultWindows.ViewModel
             }
         }
 
-        public List<string> Passwords 
+        public List<string> Passwords
         {
             get
             {
@@ -111,16 +115,16 @@ namespace KeyVaultWindows.ViewModel
             Context.management.Addition = Context.Passwords[PasswordIndex].Addition;
         }
 
-        private void OnPageTransitionCommandExecuted(object p) 
-        { 
-            switch (p) 
-            { 
+        private void OnPageTransitionCommandExecuted(object p)
+        {
+            switch (p)
+            {
                 case "PasswordManagement":
                     Context.management.IsReadonly = false;
                     Context.management.Title = "Добавить пароль";
                     Context.management.ButtonContent = "Добавить";
                     Context.management.GridLength = new GridLength(0, GridUnitType.Star);
-                    Context.PageMain.Content =  new KeyVaultWindows.View.PagePasswordManagement();
+                    Context.PageMain.Content = new KeyVaultWindows.View.PagePasswordManagement();
                     Context.PasswordAction = "AddPassword";
 
                     Context.management.Name = string.Empty;
@@ -128,21 +132,25 @@ namespace KeyVaultWindows.ViewModel
                     Context.management.Adress = string.Empty;
                     Context.management.Login = string.Empty;
                     Context.management.Addition = string.Empty;
-                    break; 
-                case "PasswordGeneration":  
-                    Context.PageMain.Content = new KeyVaultWindows.View.PagePasswordGeneration();  
-                    break; 
-                case "PasswordExport":
-                    MessageBox.Show("Soon");
-                    break; 
-                case "Settings":            
-                    Context.PageMain.Content = new KeyVaultWindows.View.PageSettings();            
                     break;
-            } 
+                case "PasswordGeneration":
+                    Context.PageMain.Content = new KeyVaultWindows.View.PagePasswordGeneration();
+                    break;
+                case "PasswordExport":
+                    ExportPassword();
+                    break;
+                case "Settings":
+                    Context.PageMain.Content = new KeyVaultWindows.View.PageSettings();
+                    break;
+            }
         }
 
         private bool CanPageTransitionCommandExecute(object p)
         {
+            if ((string)p == "PasswordExport")
+            {
+                return Context.AllPasswords.Count > 0;
+            }
             return true;
         }
 
@@ -162,6 +170,78 @@ namespace KeyVaultWindows.ViewModel
             Context.PasswordString = Context.Passwords
                 .Select(tmppass => tmppass.Name)
                 .ToList();
+        }
+
+        private void ExportPassword()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = "KeyVault";
+            saveFileDialog.DefaultExt = ".txt";
+            saveFileDialog.Filter = "KeyVault (.txt)|*.txt";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+
+                using (StreamWriter writer = File.AppendText(saveFileDialog.FileName))
+                {
+                    string passwords = GetPasswordText();
+                    writer.WriteLine(passwords); // Добавляем текст в файл
+                }
+                var result = MessageBox.Show("Пароли успешно сохранены.\nХотите открыть сохраненный файл?", "Сохранение завершено", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Process.Start("cmd", "/c start \"\" \"" + saveFileDialog.FileName + "\"");
+                }
+            }
+        }
+
+        private string GetPasswordText()
+        {
+            int count = Context.AllPasswords.Count;
+
+            int maxname = 8;
+            int maxpass = 6;
+            int maxadres = 5;
+            int maxlogin = 5;
+            int maxaddition = 13;
+
+            foreach (var tmppass in Context.AllPasswords)
+            {
+                maxname = Math.Max(maxname, tmppass.Name.Length);
+                maxpass = Math.Max(maxpass, tmppass.Pass.Length);
+                maxadres = Math.Max(maxadres, tmppass.Adress.Length);
+                maxlogin = Math.Max(maxlogin, tmppass.Login.Length);
+                maxaddition = Math.Max(maxaddition, tmppass.Addition.Length);
+            }
+            StringBuilder stringBuilder = new StringBuilder();
+            string separator = "+" + new string('-', maxname + 2) + "+" + new string('-', maxpass + 2) + "+" + new string('-', maxadres + 2) + "+" + new string('-', maxlogin + 2) + "+" + new string('-', maxaddition + 2) + "+\n";
+            stringBuilder.Append(separator);
+            stringBuilder.Append(
+                "| Название " + new string(' ', maxname - 8) +
+                "| Пароль " + new string(' ', maxpass - 6) +
+                "| Адрес " + new string(' ', maxadres - 5) +
+                "| Логин " + new string(' ', maxlogin - 5) +
+                "| Дополнительно " + new string(' ', maxaddition - 13) + "|\n");
+            stringBuilder.Append(separator);
+
+            foreach (var tmppass in Context.AllPasswords)
+            {
+                stringBuilder.Append(
+                    "| " + PadRightWithSpaces(tmppass.Name, maxname) +
+                    " | " + PadRightWithSpaces(tmppass.Pass, maxpass) +
+                    " | " + PadRightWithSpaces(tmppass.Adress, maxadres) +
+                    " | " + PadRightWithSpaces(tmppass.Login, maxlogin) +
+                    " | " + PadRightWithSpaces(tmppass.Addition, maxaddition) + " |\n");
+                stringBuilder.Append(separator);
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        private string PadRightWithSpaces(string value, int length)
+        {
+            return value + new string(' ', length - value.Length);
         }
     }
 }
