@@ -50,7 +50,7 @@ namespace KeyVaultWindows
                     {
                         try
                         {
-                            json = AESHelper.Cripto(json, "X7zN6904ckJxY399");
+                            json = AESHelper.Cripto(json, "l3u46qH14p7@Rt&{5>4<.0Lg~%8Qh7x.");
                             json = json.Substring(0, json.Length - 2);
                             Context.savedata = JsonConvert.DeserializeObject<SaveData>(json);
                             Context.settings = Context.savedata.settings;

@@ -24,7 +24,7 @@ namespace KeyVaultWindows.ProgramFile
 
         public void Save()
         {
-            string json = AESHelper.Cripto(JsonConvert.SerializeObject(this), "X7zN6904ckJxY399");
+            string json = AESHelper.Cripto(JsonConvert.SerializeObject(this), "l3u46qH14p7@Rt&{5>4<.0Lg~%8Qh7x.");
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "/ProgramData.KeyVault";
             using (StreamWriter writer = new StreamWriter(filePath))
             {
