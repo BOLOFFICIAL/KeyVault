@@ -140,6 +140,18 @@ namespace KeyVaultWindows.ViewModel
                     ExportPassword();
                     break;
                 case "Settings":
+                    if (Context.settings.ProgrammPass.Length == 0)
+                    {
+                        Context.settings.PasswordName = "Пароль программы";
+                        Context.settings.GridNameLength = new GridLength(0, GridUnitType.Pixel);
+                    }
+                    else 
+                    {
+                        Context.settings.PasswordName = "Старый пароль программы";
+                        Context.settings.GridNameLength = new GridLength(1, GridUnitType.Star);
+                    }
+                    Context.settings.Oldpass = string.Empty;
+                    Context.settings.Newpass = string.Empty;
                     Context.PageMain.Content = new KeyVaultWindows.View.PageSettings();
                     break;
             }

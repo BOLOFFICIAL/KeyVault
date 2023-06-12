@@ -32,13 +32,12 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height = "*"/>
-                    <RowDefinition Height = "*"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height = "*"/>
-                        <RowDefinition Height = "*"/>
+                        <RowDefinition Height = "{Binding GridNameLength,UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
@@ -48,9 +47,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column = "0"
-                               Content="Старый пароль программы"/>
+                               Content="{Binding PasswordName,UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <TextBox Grid.Column = "1"/>
+                        <TextBox Grid.Column = "1"
+                                 Text="{Binding Oldpass,UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
                     <Grid Grid.Row="1">
@@ -62,32 +62,10 @@
                         <Label Grid.Column = "0"
                                Content="Новый пароль программы"/>
 
-                        <TextBox Grid.Column = "1"/>
+                        <TextBox Grid.Column = "1"
+                                 Text="{Binding Newpass,UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </Grid>
-
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height = "*"/>
-                        <RowDefinition Height = "*"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width = "*"/>
-                            <ColumnDefinition Width = "*"/>
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width = "*"/>
-                            <ColumnDefinition Width = "*"/>
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Row="2"/>
             </Grid>
         </ScrollViewer>
 
@@ -100,7 +78,8 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column = "1"
-                    Content="Сохранить"/>
+                    Content="Сохранить"
+                    Command="{Binding SaveSettings}"/>
         </Grid>
     </Grid>
 </Page>
