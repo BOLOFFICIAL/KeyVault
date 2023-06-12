@@ -225,6 +225,7 @@ namespace KeyVaultWindows.ViewModel
                     Context.PasswordAction = "DeletePassword";
                     break;
             }
+            Context.savedata.Save();
         }
 
         private bool CanPasswordCommandExecute(object p)

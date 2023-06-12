@@ -123,6 +123,7 @@ namespace KeyVaultWindows.ViewModel
                 }
             }
             MessageBox.Show("Настройки успешно изменены");
+            Context.savedata.Save();
         }
 
         private bool CanSaveSettingsCommandExecute(object p)

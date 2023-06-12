@@ -21,7 +21,7 @@ namespace KeyVaultWindows.ViewModel
         public PageAuthorizationViewModel()
         {
             _authorization = new Authorization();
-            _settings = new Settings();
+            _settings = Context.settings;
             EntryPasswordCommand = new LambdaCommand(OnEntryPasswordCommandExecuted, CanEntryPasswordCommandExecute);
         }
 
