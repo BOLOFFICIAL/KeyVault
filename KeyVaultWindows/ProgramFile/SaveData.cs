@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using KeyVaultWindows.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KeyVaultWindows.Model
+namespace KeyVaultWindows.ProgramFile
 {
     internal class SaveData
     {
@@ -14,16 +15,16 @@ namespace KeyVaultWindows.Model
         public List<string> AllPasswordString;
         public List<Password> AllPasswords;
 
-        public SaveData(Settings s, List<string> AllPS, List<Password> AllP) 
+        public SaveData(Settings s, List<string> AllPS, List<Password> AllP)
         {
             settings = s;
             AllPasswordString = AllPS;
             AllPasswords = AllP;
         }
 
-        public void Save() 
+        public void Save()
         {
-            string json = JsonConvert.SerializeObject(this);
+            string json = AESHelper.Cripto(JsonConvert.SerializeObject(this), "X7zN6904ckJxY399");
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "/ProgramData.KeyVault";
             using (StreamWriter writer = new StreamWriter(filePath))
             {

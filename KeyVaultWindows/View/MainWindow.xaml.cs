@@ -1,10 +1,12 @@
 ﻿using KeyVaultWindows.Model;
+using KeyVaultWindows.ProgramFile;
 using KeyVaultWindows.View;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KeyVaultWindows
 {
@@ -39,15 +41,17 @@ namespace KeyVaultWindows
         {
             string json = "";
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "/ProgramData.KeyVault";
-            if (File.Exists(filePath)) 
+            if (File.Exists(filePath))
             {
                 using (StreamReader reader = new StreamReader(filePath))
                 {
                     json = reader.ReadToEnd();
                     if (json.Length > 0)
                     {
-                        try 
+                        try
                         {
+                            json = AESHelper.Cripto(json, "X7zN6904ckJxY399");
+                            json = json.Substring(0, json.Length - 2);
                             Context.savedata = JsonConvert.DeserializeObject<SaveData>(json);
                             Context.settings = Context.savedata.settings;
                             Context.AllPasswordString = Context.savedata.AllPasswordString;
