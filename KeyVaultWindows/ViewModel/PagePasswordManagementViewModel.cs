@@ -244,7 +244,7 @@ namespace KeyVaultWindows.ViewModel
         private void OnEditPasswordCommandExecuted(object p)
         {
             IsReadonly = false;
-            Title = "Изменить пароль";
+            Title = "Изменение пароля";
             ButtonContent = "Сохранить";
             GridLength = new GridLength(0, GridUnitType.Star);
             Context.PasswordAction = "SavePassword";

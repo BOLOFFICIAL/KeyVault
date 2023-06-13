@@ -10,67 +10,105 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height = "auto"/>
             <RowDefinition Height = "*"/>
-            <RowDefinition Height = "*"/>
-            <RowDefinition Height = "*"/>
+            <RowDefinition Height = "auto"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width = "*"/>
+                <ColumnDefinition Width = "auto"/>
                 <ColumnDefinition Width = "*"/>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column = "0"
-                    Content="Назад"
+                    Content="ᐸ"
+                    Width="50"
+                    FontWeight="Bold"
+                    FontSize="15"
+                    Margin="11"
                     Command="{Binding PageTransition}"/>
+
             <Label Grid.Column = "1"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="0,0,74,0"
+                   Foreground="DarkRed"
+                   FontWeight="Bold"
+                   FontSize="20"
                    Content="Настройки"/>
         </Grid>
 
-        <ScrollViewer Grid.Row="1">
-            <Grid>
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Hidden">
+            <Grid VerticalAlignment="Center">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height = "*"/>
+                    <RowDefinition Height = "auto"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height = "*"/>
-                        <RowDefinition Height = "{Binding GridNameLength,UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid.RowDefinitions>
+                <Border Grid.Row="0"
+                        BorderThickness="3"
+                        Margin="20,10"
+                        Padding="10,10,20,10"
+                        CornerRadius="25"
+                        BorderBrush="DarkRed">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height = "auto"/>
+                            <RowDefinition Height = "{Binding GridNameLength,UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width = "*"/>
-                            <ColumnDefinition Width = "*"/>
-                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width = "170"/>
+                                <ColumnDefinition Width = "*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column = "0"
-                               Content="{Binding PasswordName,UpdateSourceTrigger=PropertyChanged}"/>
+                            <Label Grid.Column = "0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="15"
+                                   FontWeight="Bold"
+                                   Foreground="DarkRed"
+                                   Content="{Binding PasswordName,UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <TextBox Grid.Column = "1"
-                                 Text="{Binding Oldpass,UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Grid.Column = "1"
+                                     HorizontalContentAlignment="Stretch"
+                                     FontSize="15"
+                                     FontWeight="Bold"
+                                     Foreground="Black"
+                                     Text="{Binding Oldpass,UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width = "170"/>
+                                <ColumnDefinition Width = "*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column = "0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="15"
+                                   FontWeight="Bold"
+                                   Foreground="DarkRed"
+                                   Content="Новый пароль"/>
+
+                            <TextBox Grid.Column = "1"
+                                     HorizontalContentAlignment="Stretch"
+                                     FontSize="15"
+                                     FontWeight="Bold"
+                                     Foreground="Black"
+                                     Text="{Binding Newpass,UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
                     </Grid>
-
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width = "*"/>
-                            <ColumnDefinition Width = "*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label Grid.Column = "0"
-                               Content="Новый пароль программы"/>
-
-                        <TextBox Grid.Column = "1"
-                                 Text="{Binding Newpass,UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                </Grid>
+                </Border>
             </Grid>
         </ScrollViewer>
 
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2"
+              Margin="12,2,12,12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width = "*"/>
                 <ColumnDefinition Width = "*"/>
@@ -79,6 +117,8 @@
 
             <Button Grid.Column = "1"
                     Content="Сохранить"
+                    FontWeight="Bold"
+                    FontSize="15"
                     Command="{Binding SaveSettings}"/>
         </Grid>
     </Grid>

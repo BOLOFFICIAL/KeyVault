@@ -122,7 +122,7 @@ namespace KeyVaultWindows.ViewModel
             {
                 case "PasswordManagement":
                     Context.management.IsReadonly = false;
-                    Context.management.Title = "Добавить пароль";
+                    Context.management.Title = "Добавление пароля";
                     Context.management.ButtonContent = "Добавить";
                     Context.management.GridLength = new GridLength(0, GridUnitType.Star);
                     Context.PageMain.Content = new KeyVaultWindows.View.PagePasswordManagement();
@@ -148,7 +148,7 @@ namespace KeyVaultWindows.ViewModel
                     }
                     else 
                     {
-                        Context.settings.PasswordName = "Старый пароль программы";
+                        Context.settings.PasswordName = "Старый пароль";
                         Context.settings.GridNameLength = new GridLength(1, GridUnitType.Star);
                     }
                     Context.settings.Oldpass = string.Empty;

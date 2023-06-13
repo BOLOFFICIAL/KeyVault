@@ -11,55 +11,86 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width = "*"/>
+            <ColumnDefinition Width = "240"/>
             <ColumnDefinition Width = "*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height = "*"/>
-                <RowDefinition Height = "*"/>
-                <RowDefinition Height = "*"/>
-                <RowDefinition Height = "*"/>
-                <RowDefinition Height = "*"/>
-            </Grid.RowDefinitions>
-            
-            <Button Grid.Row="0"
+        <Border Grid.Column="0"
+                BorderBrush="DarkRed"
+                Margin="2,2,1,2"
+                BorderThickness="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height = "auto"/>
+                    <RowDefinition Height = "auto"/>
+                    <RowDefinition Height = "auto"/>
+                    <RowDefinition Height = "auto"/>
+                    <RowDefinition Height = "*"/>
+                    <RowDefinition Height = "auto"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="1"
                     Content="Добавить пароль"
                     Command="{Binding PageTransition}"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    Margin="6,6,6,3"
                     CommandParameter="PasswordManagement"/>
 
-            <Button Grid.Row="1"
+                <Button Grid.Row="2"
                     Content="Сгенерировать пароль"
                     Command="{Binding PageTransition}"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    Margin="6,3,6,3"
                     CommandParameter="PasswordGeneration"/>
 
-            <Button Grid.Row="2"
-                    Content="Экспорт паролей"
-                    Command="{Binding PageTransition}"
-                    CommandParameter="PasswordExport"/>
-
-            <Button Grid.Row="3"
+                <Button Grid.Row="3"
                     Content="Настройки"
                     Command="{Binding PageTransition}"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    Margin="6,3,6,3"
                     CommandParameter="Settings"/>
-            
-        </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height = "*"/>
-                <RowDefinition Height = "*"/>
-            </Grid.RowDefinitions>
-            
-            <TextBox Grid.Row="0"
-                     Text="{Binding FindPassword,UpdateSourceTrigger=PropertyChanged}"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center"/>
 
-            <ListView Grid.Row="1" 
-                      HorizontalContentAlignment="Center"
-                      ItemsSource="{Binding Passwords,UpdateSourceTrigger=PropertyChanged}"
-                      SelectedIndex="{Binding PasswordIndex,UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Grid.Row="5"
+                    Content="Экспорт паролей"
+                    Command="{Binding PageTransition}"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    Margin="6,3,6,6"
+                    CommandParameter="PasswordExport"/>
 
-        </Grid>
+            </Grid>
+        </Border>
+        <Border BorderBrush="DarkRed"
+                Margin="1,2,2,2"
+                Grid.Column="1"
+                BorderThickness="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height = "auto"/>
+                    <RowDefinition Height = "*"/>
+                </Grid.RowDefinitions>
+
+                <TextBox Grid.Row="0"
+                         Text="{Binding FindPassword,UpdateSourceTrigger=PropertyChanged}"
+                         HorizontalContentAlignment="Center"
+                         Padding="3"
+                         FontSize="15"
+                         FontWeight="Bold"
+                         Foreground="Black"
+                         Margin="6"
+                         VerticalContentAlignment="Center"/>
+
+                <ListView Grid.Row="1" 
+                          HorizontalContentAlignment="Center"
+                          Foreground="DarkRed"
+                          FontSize="20"
+                          FontWeight="Bold"
+                          Margin="12,6,12,12"
+                          ItemsSource="{Binding Passwords,UpdateSourceTrigger=PropertyChanged}"
+                          SelectedIndex="{Binding PasswordIndex,UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </Border>
     </Grid>
 </Page>
