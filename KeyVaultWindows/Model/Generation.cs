@@ -20,7 +20,8 @@ namespace KeyVaultWindows.Model
             if (Numbers)    consts.Add("0123456789"); 
             if (Chars)      consts.Add("@#%\"&*()_-+={}<>?:[].~"); 
             if (Letters)    consts.Add("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"); 
-            int.TryParse(Length, out int length); 
+            int.TryParse(Length, out int length);
+            length = Math.Abs(length);
             var password = new StringBuilder(length);
 
             for (var i = 0; i < length; i++)

@@ -53,8 +53,11 @@ namespace KeyVaultWindows.ViewModel
             {
                 if (_generation.Length != value)
                 {
-                    _generation.Length = value;
-                    OnPropertyChanged("Length");
+                    if (value.Length < 3) 
+                    {
+                        _generation.Length = value;
+                        OnPropertyChanged("Length");
+                    }
                 }
             }
         }
