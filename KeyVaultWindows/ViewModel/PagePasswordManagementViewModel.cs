@@ -1,11 +1,9 @@
 ﻿using KeyVaultWindows.Command;
 using KeyVaultWindows.Model;
 using KeyVaultWindows.ProgramFile;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace KeyVaultWindows.ViewModel
@@ -227,7 +225,7 @@ namespace KeyVaultWindows.ViewModel
                     break;
             }
             Context.AllPasswordString.Clear();
-            foreach (var password in Context.AllPasswords) 
+            foreach (var password in Context.AllPasswords)
             {
                 Context.AllPasswordString.Add(password.Name);
             }

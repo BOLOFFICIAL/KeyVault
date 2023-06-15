@@ -104,7 +104,7 @@ namespace KeyVaultWindows.ViewModel
 
         private void OnSaveSettingsCommandExecuted(object p)
         {
-            if (Oldpass.Length > 0) 
+            if (Oldpass.Length > 0)
             {
                 if (_settings.ProgrammPass.Length == 0)
                 {

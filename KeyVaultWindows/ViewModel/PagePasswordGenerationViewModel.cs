@@ -1,15 +1,8 @@
 ﻿using KeyVaultWindows.Command;
 using KeyVaultWindows.Model;
 using KeyVaultWindows.ProgramFile;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KeyVaultWindows.ViewModel
 {
@@ -53,7 +46,7 @@ namespace KeyVaultWindows.ViewModel
             {
                 if (_generation.Length != value)
                 {
-                    if (value.Length < 3) 
+                    if (value.Length < 3)
                     {
                         _generation.Length = value;
                         OnPropertyChanged("Length");
@@ -123,7 +116,7 @@ namespace KeyVaultWindows.ViewModel
 
         private bool CanGenerationCommandExecute(object p)
         {
-            return _generation.Length.Length > 0 && (Numbers|| Chars|| Letters);
+            return _generation.Length.Length > 0 && (Numbers || Chars || Letters);
         }
 
         private void OnPageTransitionCommandExecuted(object p)

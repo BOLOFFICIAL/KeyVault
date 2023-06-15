@@ -146,7 +146,7 @@ namespace KeyVaultWindows.ViewModel
                         Context.settings.PasswordName = "Пароль программы";
                         Context.settings.GridNameLength = new GridLength(0, GridUnitType.Pixel);
                     }
-                    else 
+                    else
                     {
                         Context.settings.PasswordName = "Старый пароль";
                         Context.settings.GridNameLength = new GridLength(1, GridUnitType.Star);

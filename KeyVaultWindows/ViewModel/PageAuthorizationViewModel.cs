@@ -1,14 +1,8 @@
 ﻿using KeyVaultWindows.Command;
 using KeyVaultWindows.Model;
 using KeyVaultWindows.ProgramFile;
-using KeyVaultWindows.View;
-using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace KeyVaultWindows.ViewModel
 {
