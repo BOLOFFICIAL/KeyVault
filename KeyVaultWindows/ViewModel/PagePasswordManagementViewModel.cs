@@ -1,9 +1,11 @@
 ﻿using KeyVaultWindows.Command;
 using KeyVaultWindows.Model;
 using KeyVaultWindows.ProgramFile;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace KeyVaultWindows.ViewModel
@@ -179,6 +181,7 @@ namespace KeyVaultWindows.ViewModel
             switch (Context.PasswordAction)
             {
                 case "AddPassword":
+                    Name = Name.Length > 0 ? Name : Adress;
                     if (Context.AllPasswords.Any(pass =>
                     pass.Name == Name &&
                     pass.Pass == Pass &&
@@ -189,7 +192,6 @@ namespace KeyVaultWindows.ViewModel
                         MessageBox.Show("Такой элемент уже существует");
                         break;
                     }
-                    Context.AllPasswordString.Add(Name);
                     Context.AllPasswords.Add(new Password(Name, Pass, Adress, Login, Addition));
                     Name = string.Empty;
                     Pass = string.Empty;
@@ -201,7 +203,6 @@ namespace KeyVaultWindows.ViewModel
                     if (MessageBox.Show("Удалить пароль?", "", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         DeletePassword(Context.Passwords[Context.PasswordIndex]);
-                        DeletePassword(Context.PasswordString[Context.PasswordIndex]);
                         Context.PageMain.Content = new KeyVaultWindows.View.PageMain();
                         Context.PasswordIndex = -1;
                     }
@@ -218,13 +219,17 @@ namespace KeyVaultWindows.ViewModel
                         break;
                     }
                     EditPassword(Context.Passwords[Context.PasswordIndex], new Password(Name, Pass, Adress, Login, Addition));
-                    EditPassword(Context.PasswordString[Context.PasswordIndex], Name);
                     IsReadonly = true;
                     Title = "Пароль";
                     ButtonContent = "Удалить";
                     GridLength = new GridLength(1, GridUnitType.Star);
                     Context.PasswordAction = "DeletePassword";
                     break;
+            }
+            Context.AllPasswordString.Clear();
+            foreach (var password in Context.AllPasswords) 
+            {
+                Context.AllPasswordString.Add(password.Name);
             }
             Context.savedata.Save();
         }
@@ -233,7 +238,7 @@ namespace KeyVaultWindows.ViewModel
         {
             if (Context.PasswordAction == "AddPassword" || Context.PasswordAction == "SavePassword")
             {
-                return Name.ToString().Length > 0 && Pass.ToString().Length > 0 && Adress.ToString().Length > 0;
+                return Pass.ToString().Length > 0 && Adress.ToString().Length > 0;
             }
             else
             {

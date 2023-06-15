@@ -171,11 +171,11 @@ namespace KeyVaultWindows.ViewModel
         {
             Context.Passwords = Context.AllPasswords
                 .Where(tmppass =>
-                    tmppass.Name.Contains(Context.filter) ||
-                    tmppass.Pass.Contains(Context.filter) ||
-                    tmppass.Adress.Contains(Context.filter) ||
-                    tmppass.Login.Contains(Context.filter) ||
-                    tmppass.Addition.Contains(Context.filter))
+                    tmppass.Name.ToUpper().Contains(Context.filter.ToUpper()) ||
+                    tmppass.Pass.ToUpper().Contains(Context.filter.ToUpper()) ||
+                    tmppass.Adress.ToUpper().Contains(Context.filter.ToUpper()) ||
+                    tmppass.Login.ToUpper().Contains(Context.filter.ToUpper()) ||
+                    tmppass.Addition.ToUpper().Contains(Context.filter.ToUpper()))
                 .Select(tmppass =>
                     new Password(tmppass.Name, tmppass.Pass, tmppass.Adress, tmppass.Login, tmppass.Addition))
                 .ToList();
