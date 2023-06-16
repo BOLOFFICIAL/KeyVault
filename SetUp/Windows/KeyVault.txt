@@ -1,0 +1,26 @@
+License Agreement for the KeyVault Program
+
+Please carefully read this License Agreement (the "Agreement") before using the KeyVault application (the "Application"). This is a legal agreement between you (an individual or a legal entity) and the developer and owner of the Application, which is referred to in this Agreement as "we" or "us". By using the Application, you agree to be bound by the terms of this Agreement. If you do not agree to these terms, please do not use the Application.
+
+License
+We grant you a limited, non-exclusive, non-transferable license to use the KeyVault App on your device, subject to the terms of this Agreement. You may use the Application solely for personal or commercial purposes, in compliance with all applicable laws and regulations.
+
+Intellectual Property
+The KeyVault application, including all its components, content, graphics, logos, design, and other materials, are the intellectual property of the developer and are protected by copyright and other intellectual property laws. You may not modify, copy, distribute, transmit, display, create derivative works from, sell, lease, license, or otherwise use the materials of the Application without our prior written permission.
+
+Usage Restrictions
+You agree to use the KeyVault App for any illegal or prohibited purposes. You may not use the Application to hack, sort passwords, distribute malicious software, or engage in any other actions that may harm you or third parties.
+
+Limitation of Liability
+When using the KeyVault Application, you assume all risks associated with its use. We are not responsible for any direct, indirect, incidental, special, punitive, other damages resulting from the use or inability to use the Application.
+
+Updates and Support
+We may provide updates and fixes to the KeyVault Application at our discretion. We are not obligated to provide any technical support or updates to the Application, we may do so at our discretion.
+
+Termination
+We reserve the right to terminate your license to use the KeyVault Application at any time if you violate the terms of this Agreement. In case of termination, you are obligated to stop using the Application and delete it from your device.
+
+Applicable Law and Dispute Resolution
+This Agreement is governed by and construed in accordance with the laws of the State of California, United States of America. Any disputes arising out of or relating to this Agreement or the Application shall be resolved through arbitration administered by the American Arbitration Association in accordance with its Commercial Arbitration Rules. The arbitration shall take place in Santa Clara County, California, and the language of the arbitration shall be English.
+
+By using the KeyVault Application, you agree to be bound by the terms of this Agreement. 
